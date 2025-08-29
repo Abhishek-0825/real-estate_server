@@ -14,9 +14,11 @@ function auth(req, res, next) {
   }
 }
 
-function requireRole(role) {
+// allow either a single role or any of an array of roles
+function requireRole(roles) {
+  const required = Array.isArray(roles) ? roles : [roles];
   return (req, res, next) => {
-    if (!req.user || req.user.role !== role) {
+    if (!req.user || !required.includes(req.user.role)) {
       return res.status(403).json({ error: 'Forbidden' });
     }
     next();

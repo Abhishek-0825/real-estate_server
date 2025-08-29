@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS UserProfiles (
+  profile_id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  dob DATE NULL,
+  address TEXT NULL,
+  profile_pic VARCHAR(255) NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+);
