@@ -13,13 +13,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
+// Root Route
+app.get('/', (req, res) => {
+  res.send('Real Estate API is running 🚀');
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 
-// Health
+// Health Check
 app.get('/health', (_req, res) => res.json({ status: 'ok' }));
 
-// 404
+// 404 Handler
 app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
 
 module.exports = app;
